@@ -31,10 +31,10 @@
             "cwd": "${workspaceFolder}",
             "program": "horizon.exe",
             "args": [
-                "C:\\Users\\gcmcn\\OneDrive\\Videos\\HB1-yellow\\DJIG0067.mp4",
+                "C:\\Users\\gcmcn\\OneDrive\\Videos\\HB1-yellow\\DJIG0068.mp4",
                 "output.mp4"
             ],
-            "stopAtEntry": true,
+            "stopAtEntry": false,
             "symbolSearchPath": ".;C:\\Users\\gcmcn\\OneDrive\\Documents\\Dev\\opencv\\install\\opencv\\x64\\vc17\\lib;C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.34.31933\\lib\\x64;C:\\Program Files (x86)\\Windows Kits\\10\\Lib\\10.0.22000.0\\um\\x64;C:\\Program Files (x86)\\Windows Kits\\10\\Lib\\10.0.22000.0\\ucrt\\x64",
             "console": "integratedTerminal",
             "logging": {

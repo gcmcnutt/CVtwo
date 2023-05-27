@@ -26,18 +26,21 @@ int main(int argc, char** argv) {
     printf("%d frames @ %d fps\n", num_frames, fps);
 
     Mat intrinsic = (Mat_<double>(3,3) <<
-        299.39646639,    0.,          419.96165812,
-           0.,          302.5602385,   230.25411049,
-           0.,            0.,            1.
+        5.6235646134431738e+02, 0., 6.6657664364034690e+02, 0.,
+       5.1284928523825090e+02, 3.3791116498155083e+02, 0., 0., 1.
     );
     Mat distortion = (Mat_<double>(1,5) <<
-        -0.16792771, 0.03121603, 0.00218195, -0.00026904, -0.00263317
+        0., 0., 0., 0., 0.
     );
 
     VideoWriter writer(argv[2], VideoWriter::fourcc('X', 'V', 'I', 'D'), fps, Size(width, height), true);
     std::ofstream horizonf(argv[2], std::ios::binary);
 
-    Mat mask = imread("hb1-mask.jpg", IMREAD_GRAYSCALE);
+    Mat imask = imread("hb1-mask.png", IMREAD_GRAYSCALE);
+    Mat mask;
+    undistort(imask, mask, intrinsic, distortion);
+    resize(mask, mask, Size2d(width / 4, height / 4), 0, 0, INTER_NEAREST);
+    imshow("mask", mask);
 
     for (int f = 0; f < num_frames; f++) {
         // read next frame
@@ -67,7 +70,7 @@ int main(int argc, char** argv) {
 
         // find horizon line
         Vec4f line;
-        findNonZero(edges, nonzeros);
+        findNonZero(maskimg, nonzeros);
         if (nonzeros.total() != 0) {
             fitLine(nonzeros, line, 2, 0, 0.01, 0.01);  // 2 = CV_DIST_L2
 
